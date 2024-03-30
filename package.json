@@ -1,5 +1,5 @@
 {
-  "name": "weather-cli",
+  "name": "weather-cli-ruzzhammer",
   "version": "1.0.0",
   "description": "CLI for getting weather",
   "main": "weather.js",
@@ -14,7 +14,7 @@
     "cli",
     "weather"
   ],
-  "author": "Ruslan Khakhonin",
+  "author": "Ruslan Khakhonin / RuzzHammer",
   "license": "ISC",
   "repository": {
     "type": "git",

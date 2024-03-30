@@ -13,29 +13,29 @@ const getExistingToken = async () => {
 };
 
 const getLocation = async (city) => {
-  try {
-    const { data } = await axios.get(
-      "https://api.openweathermap.org/geo/1.0/direct",
-      {
-        params: {
-          q: city,
-          appid: await getExistingToken(),
-        },
-      }
-    );
+  const { data, status } = await axios.get(
+    "https://api.openweathermap.org/geo/1.0/direct",
+    {
+      params: {
+        q: city,
+        appid: await getExistingToken(),
+      },
+    }
+  );
 
-    return {
-      lat: data[0].lat,
-      lon: data[0].lon,
-    };
-  } catch (error) {
-    throw new Error("Город не найден");
+  if (!data || status !== 200) {
+    throw new Error("Не найден город");
   }
+
+  return {
+    lat: data[0].lat,
+    lon: data[0].lon,
+  };
 };
 
 const getWeather = async () => {
   const { lat, lon } = await getLocation(
-    await getKeyValue(STORAGE_DICTIONARY.city)
+    await getKeyValue(STORAGE_DICTIONARY.token)
   );
   const { data } = await axios.get(
     "https://api.openweathermap.org/data/2.5/weather",
